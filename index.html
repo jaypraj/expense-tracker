@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+    <title>Expense Tracker</title>
+</head>
+<body>
+    <header>
+        <h1>Expense Tracker</h1>
+    </header>
+
+    <main class="container">
+        <form action="#" method="post" class="form">
+            <label for="amount">
+                Amount: <input type="number" name="amount" id="amount">
+            </label>
+            <label for="note">
+                Note: <input type="text" name="note" id="note">
+            </label>
+            <label for="dateTime">
+                Date: <input type="datetime-local" name="dateTime" id="dateTime">
+            </label>
+            <button type="button" id="addBtn">Add</button>
+        </form>
+
+        <table class="expenses">
+            <thead>
+                <th>Amount</th>
+                <th>Note</th>
+                <th>DateTime</th>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </main>
+</body>
+</html>

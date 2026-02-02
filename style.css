@@ -1,0 +1,21 @@
+.container {
+    width: 1024px;
+    margin: 0 auto;
+}
+
+.form {
+    height: 50%;
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: space-around;
+    align-items: center;
+    align-content: space-around;
+}
+
+.label {
+    margin: 2px;
+}
+
+.expenses {
+    display: none;
+}
