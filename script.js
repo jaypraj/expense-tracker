@@ -1,41 +1,69 @@
-let amount;
-let note;
-let dateTime;
+class Expense {
+    amount;
+    category;
+    note;
+    dateTime;
 
-let amountInput = document.querySelector("#amount");
-let noteInput = document.querySelector("#note");
-let dateTimeInput = document.querySelector("#dateTime");
+    constructor(amount, category, note, dateTime) {
+        this.amount = amount;
+        this.category = category;
+        this.note = note;
+        this.dateTime = dateTime;
+    }
+}
+
+let amount = document.querySelector("#amount");
+let category = document.querySelector("#category");
+let note = document.querySelector("#note");
+let dateTime = document.querySelector("#dateTime");
 let addBtn = document.querySelector("#addBtn");
+let expensesTable = document.querySelector(".expenses");
 
-let form = document.querySelector(".form");
+const expenses = [];
 
+let form = document.querySelector("#expenseForm");
+
+// Prevent the default behaviour of form submission
 form.addEventListener("submit", (e) => {
     e.preventDefault();
 });
 
 addBtn.addEventListener("click", () => {
-    console.log("Clicked!")
-
-    amount = amountInput.value;
-    note = noteInput.value;
-    dateTime = dateTimeInput.value;
-    console.log(amount);
+    const expense = new Expense(amount.value, category.value, note.value, dateTime.value);
 
     let row = document.createElement("tr");
 
     let amountCol = document.createElement("td");
+    let categoryCol = document.createElement("td");
     let noteCol = document.createElement("td");
     let dateCol = document.createElement("td");
+    let deleteBtn = document.createElement("button");
+    deleteBtn.textContent = "x";
 
-    amountCol.textContent = amount;
-    noteCol.textContent = note;
-    dateCol.textContent = dateTime;
-
+    
+    amountCol.textContent = expense.amount;
+    categoryCol.textContent = expense.category;
+    noteCol.textContent = expense.note;
+    dateCol.textContent = expense.dateTime;
+    
     row.appendChild(amountCol);
+    row.appendChild(categoryCol)
     row.appendChild(noteCol);
     row.appendChild(dateCol);
-
-    document.querySelector(".expenses").style.display = "table";
+    row.appendChild(document.createElement("td").appendChild(deleteBtn));
+    
+    expensesTable.style.display = "table";
     document.querySelector(".expenses tbody").appendChild(row);
     form.reset();
+    
+    deleteBtn.addEventListener("click", (e) => deleteExpense(e));
+    expenses.push(expense);
 });
+
+function deleteExpense(e) {
+    e.target.parentElement.remove();
+
+    if (!document.querySelector(".expenses tbody").hasChildNodes()) {
+        expensesTable.style.display = "None";
+    }
+}

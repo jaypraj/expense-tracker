@@ -1,5 +1,6 @@
 .container {
     width: 1024px;
+    height: 100%;
     margin: 0 auto;
 }
 
@@ -8,8 +9,12 @@
     display: flex;
     flex-flow: column wrap;
     justify-content: space-around;
-    align-items: center;
+    align-items: left;
     align-content: space-around;
+}
+
+.form input {
+    margin: 5px;
 }
 
 .label {
@@ -18,4 +23,15 @@
 
 .expenses {
     display: none;
+    margin: 50px auto;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 5px;
+}
+
+.expenses tr {
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
 }

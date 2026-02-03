@@ -13,9 +13,19 @@
     </header>
 
     <main class="container">
-        <form action="#" method="post" class="form">
+        <form action="#" method="post" class="form" id="expenseForm">
             <label for="amount">
                 Amount: <input type="number" name="amount" id="amount">
+            </label>
+            <label for="category">
+                Category: 
+                <select name="category" id="category">
+                    <option value="Food">Food</option>
+                    <option value="Transport">Transport</option>
+                    <option value="Accomodation">accomodation</option>
+                    <option value="Utilitybills">Utility Utility Bills</option>
+                    <option value="Others">Others</option>
+                </select>
             </label>
             <label for="note">
                 Note: <input type="text" name="note" id="note">
@@ -29,8 +39,10 @@
         <table class="expenses">
             <thead>
                 <th>Amount</th>
+                <th>Category</th>
                 <th>Note</th>
                 <th>DateTime</th>
+                <th></th>
             </thead>
             <tbody></tbody>
         </table>
