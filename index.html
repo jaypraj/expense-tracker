@@ -14,12 +14,18 @@
 
     <main class="container">
         <form action="#" method="post" class="form" id="expenseForm">
+            <label for="title">
+                Title: <span class="required-astrisk">*</span>
+                <input type="text" name="title" id="title" required>
+            </label>
             <label for="amount">
-                Amount: <input type="number" name="amount" id="amount">
+                Amount: <span class="required-astrisk">*</span>
+                <input type="number" name="amount" id="amount" required>
             </label>
             <label for="category">
                 Category: 
                 <select name="category" id="category">
+                    <option value="" selected="selected">-- Select --</option>
                     <option value="Food">Food</option>
                     <option value="Transport">Transport</option>
                     <option value="Accomodation">accomodation</option>
@@ -38,6 +44,7 @@
 
         <table class="expenses">
             <thead>
+                <th>Title</th>
                 <th>Amount</th>
                 <th>Category</th>
                 <th>Note</th>

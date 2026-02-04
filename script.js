@@ -1,25 +1,37 @@
 class Expense {
     id;
+    title;
     amount;
     category;
     note;
     dateTime;
 
-    constructor(amount, category, note, dateTime) {
+    constructor(title, amount, category, note, dateTime) {
         this.id = crypto.randomUUID();
+        this.title = title;
         this.amount = amount;
         this.category = category;
         this.note = note;
-        this.dateTime = dateTime;
+        this.dateTime = new Date(dateTime).toISOString();
     }
 }
 
+let now = new Date();
+
+let title = document.querySelector("#title");
 let amount = document.querySelector("#amount");
 let category = document.querySelector("#category");
 let note = document.querySelector("#note");
 let dateTime = document.querySelector("#dateTime");
+dateTime.value = getLocalDateTime(now);
 let addBtn = document.querySelector("#addBtn");
 let expensesTable = document.querySelector(".expenses");
+
+function getLocalDateTime(date) {
+    const pad = (n) => String(n).padStart(2, "0");
+    return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}T` +
+    `${pad(date.getHours())}:${pad(date.getMinutes())}`;
+}
 
 expensesTable.addEventListener("click", (e) => {
     if (e.target.dataset.action == "delete") {
@@ -39,7 +51,12 @@ form.addEventListener("submit", (e) => {
 addBtn.addEventListener("click", () => addExpense());
 
 function addExpense() {
-    const expense = new Expense(amount.value, category.value, note.value, dateTime.value);
+    if (title.value == "" || amount.value == "") {
+        alert("Title or amount cannot be empty!");
+        return;
+    }
+
+    const expense = new Expense(title.value, amount.value, category.value, note.value, dateTime.value);
     expenses.push(expense);
 
     renderExpenses();
@@ -64,6 +81,7 @@ function renderExpenses() {
     expenses.forEach((expense) => {
         let row = document.createElement("tr");
 
+        let titleCol = document.createElement("td");
         let amountCol = document.createElement("td");
         let categoryCol = document.createElement("td");
         let noteCol = document.createElement("td");
@@ -74,11 +92,13 @@ function renderExpenses() {
         deleteBtn.textContent = "x";
 
         row.dataset.expenseId = expense.id;
+        titleCol.textContent = expense.title;
         amountCol.textContent = expense.amount;
         categoryCol.textContent = expense.category;
         noteCol.textContent = expense.note;
-        dateCol.textContent = expense.dateTime;
-
+        dateCol.textContent = new Date(expense.dateTime).toLocaleString();
+        
+        row.appendChild(titleCol);
         row.appendChild(amountCol);
         row.appendChild(categoryCol);
         row.appendChild(noteCol);
