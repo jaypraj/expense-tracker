@@ -30,7 +30,7 @@ let expensesTable = document.querySelector(".expenses");
 function getLocalDateTime(date) {
     const pad = (n) => String(n).padStart(2, "0");
     return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}T` +
-    `${pad(date.getHours())}:${pad(date.getMinutes())}`;
+    `${pad(date.getHours())}:${pad(date.getMinutes())}:${pad(date.getSeconds())}`;
 }
 
 expensesTable.addEventListener("click", (e) => {
@@ -56,7 +56,9 @@ function addExpense() {
         return;
     }
 
-    const expense = new Expense(title.value, amount.value, category.value, note.value, dateTime.value);
+    const expense = new Expense(title.value, amount.value, category.value, note.value, new Date(dateTime.value));
+    console.log(dateTime.value);
+    console.log(expense.dateTime);
     expenses.push(expense);
 
     renderExpenses();
@@ -97,7 +99,7 @@ function renderExpenses() {
         categoryCol.textContent = expense.category;
         noteCol.textContent = expense.note;
         dateCol.textContent = new Date(expense.dateTime).toLocaleString();
-        
+
         row.appendChild(titleCol);
         row.appendChild(amountCol);
         row.appendChild(categoryCol);
