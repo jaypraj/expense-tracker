@@ -66,6 +66,9 @@ function addExpense() {
     renderExpenses();
 
     form.reset();
+    
+    // Sets `datetime-local` to the current datetime value
+    dateTime.value = getLocalDateTime(now);
 }
 
 function deleteExpense(expenseId) {
