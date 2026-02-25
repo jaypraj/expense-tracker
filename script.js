@@ -23,6 +23,8 @@ let amount = document.querySelector("#amount");
 let category = document.querySelector("#category");
 let note = document.querySelector("#note");
 let dateTime = document.querySelector("#dateTime");
+
+// Setting `datetime-local` to the current datetime value
 dateTime.value = getLocalDateTime(now);
 let addBtn = document.querySelector("#addBtn");
 let expensesTable = document.querySelector(".expenses");
