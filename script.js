@@ -17,6 +17,11 @@ class Expense {
 }
 
 let now = new Date();
+const locale = navigator.language;
+let numberFormat = new Intl.NumberFormat(locale, {
+    style: "currency",
+    currency: "INR",
+});
 
 let title = document.querySelector("#title");
 let amount = document.querySelector("#amount");
@@ -66,7 +71,7 @@ function addExpense() {
     renderExpenses();
 
     form.reset();
-    
+
     // Sets `datetime-local` to the current datetime value
     dateTime.value = getLocalDateTime(now);
 }
@@ -100,7 +105,7 @@ function renderExpenses() {
 
         row.dataset.expenseId = expense.id;
         titleCol.textContent = expense.title;
-        amountCol.textContent = expense.amount;
+        amountCol.textContent = numberFormat.format(expense.amount);
         categoryCol.textContent = expense.category;
         noteCol.textContent = expense.note;
         dateCol.textContent = new Date(expense.dateTime).toLocaleString();
